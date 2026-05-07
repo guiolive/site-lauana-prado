@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Proposta · Lauana Prado · Redesign do Site Oficial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --ink:        #0A0907;
+  --ink-2:      #14110D;
+  --ink-3:      #1E1A14;
+  --bone:       #EBE3D1;
+  --bone-2:     #D8CFB9;
+  --bone-3:     #B5AB91;
+  --paper:      #E9DFC7;
+  --paper-2:    #DACDB0;
+  --rust:       #C44A1F;
+  --rust-deep:  #8C2F0F;
+  --rust-soft:  #E0735A;
+  --ember:      #E8A33A;
+  --moss:       #4F5638;
+
+  --display: "Fraunces", "Times New Roman", serif;
+  --body:    "Manrope", -apple-system, sans-serif;
+  --mono:    "DM Mono", ui-monospace, monospace;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #999;
+  font-family: var(--body);
+  font-size: 10pt;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  color-adjust: exact;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  background: var(--ink);
+  color: var(--bone);
+  display: flex;
+  flex-direction: column;
+}
+.page:last-child { page-break-after: auto; break-after: auto; }
+
+.page.cream { background: var(--paper); color: var(--ink); }
+
+/* page chrome */
+.page-chrome-top, .page-chrome-bottom {
+  position: absolute;
+  left: 14mm; right: 14mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.page-chrome-top { top: 12mm; opacity: 0.55; }
+.page-chrome-bottom { bottom: 12mm; opacity: 0.55; }
+
+.page.cream .page-chrome-top, .page.cream .page-chrome-bottom { opacity: 0.5; }
+
+.page-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.page-mark::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--rust);
+}
+
+/* layout containers */
+.page-body {
+  flex: 1;
+  padding: 24mm 18mm 18mm;
+  display: flex;
+  flex-direction: column;
+}
+
+/* type primitives */
+.display { font-family: var(--display); font-weight: 400; line-height: 0.86; letter-spacing: -0.04em; font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1; }
+.italic  { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+.eyebrow { font-family: var(--mono); font-size: 8pt; letter-spacing: 0.2em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.6rem; opacity: 0.7; }
+.eyebrow::before { content: ""; width: 16px; height: 1px; background: currentColor; }
+.eyebrow.rust { color: var(--rust); opacity: 1; }
+.eyebrow.rust::before { background: var(--rust); }
+
+.tnum  { font-feature-settings: "tnum", "ss01"; }
+.mono  { font-family: var(--mono); font-feature-settings: "tnum"; }
+.serif { font-family: var(--display); }
+.it    { font-style: italic; }
+
+/* ===========================
+   COVER (page 1)
+   =========================== */
+.cover {
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+  position: relative;
+}
+.cover::after {
+  content: "";
+  position: absolute;
+  bottom: -10%;
+  right: -15%;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(196,74,31,0.18), transparent 60%);
+  pointer-events: none;
+}
+
+.cover-meta-top {
+  position: absolute;
+  top: 12mm; left: 18mm; right: 18mm;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 8pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+}
+
+.cover-body {
+  flex: 1;
+  padding: 40mm 18mm 30mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.cover-tag {
+  font-family: var(--mono);
+  font-size: 9pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 8mm;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.cover-tag::before {
+  content: ""; width: 28px; height: 1px;
+  background: var(--rust);
+}
+
+.cover-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 110pt;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+  color: var(--bone);
+  margin-bottom: 6mm;
+}
+.cover-title .lauana {
+  display: block;
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+.cover-title .prado { display: block; position: relative; }
+.cover-title .prado::after {
+  content: "*";
+  font-size: 0.4em;
+  vertical-align: super;
+  color: var(--rust);
+  margin-left: 0.05em;
+  font-style: normal;
+}
+
+.cover-sub {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 19pt;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+  color: var(--bone-2);
+  max-width: 130mm;
+  margin-bottom: 14mm;
+}
+.cover-sub em { color: var(--rust-soft); font-style: italic; }
+
+.cover-foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12mm;
+  padding-top: 8mm;
+  border-top: 1px solid var(--ink-3);
+}
+.cover-foot-block-label {
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  margin-bottom: 3mm;
+}
+.cover-foot-block-value {
+  font-family: var(--display);
+  font-size: 13pt;
+  line-height: 1.15;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  color: var(--bone);
+}
+
+/* ===========================
+   GENERIC SECTION HEADER
+   =========================== */
+.section-no {
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 6mm;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 44pt;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  margin-bottom: 8mm;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--rust);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.lede {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 14pt;
+  line-height: 1.3;
+  font-variation-settings: "opsz" 36, "SOFT" 100, "WONK" 1;
+  max-width: 150mm;
+  margin-bottom: 10mm;
+  color: var(--bone-2);
+}
+.cream .lede { color: var(--ink); opacity: 0.85; }
+
+.body-text {
+  font-family: var(--body);
+  font-size: 10pt;
+  line-height: 1.6;
+  max-width: 150mm;
+}
+.body-text p { margin-bottom: 4mm; }
+
+/* ===========================
+   PAGE 2 — TOC
+   =========================== */
+.toc-list { display: grid; gap: 4mm; margin-top: 6mm; }
+.toc-item {
+  display: grid;
+  grid-template-columns: 14mm 1fr auto;
+  gap: 6mm;
+  align-items: baseline;
+  padding-bottom: 3mm;
+  border-bottom: 1px dashed rgba(235,227,209,0.18);
+}
+.toc-num {
+  font-family: var(--mono);
+  font-size: 8pt;
+  letter-spacing: 0.18em;
+  color: var(--rust);
+}
+.toc-name {
+  font-family: var(--display);
+  font-size: 18pt;
+  line-height: 1.15;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+}
+.toc-name em { font-style: italic; color: var(--rust-soft); font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1; }
+.toc-page {
+  font-family: var(--mono);
+  font-size: 8pt;
+  letter-spacing: 0.16em;
+  color: var(--bone-3);
+}
+
+/* ===========================
+   PAGE 3 — DIAGNÓSTICO
+   =========================== */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6mm;
+  margin-top: 8mm;
+}
+.metric {
+  border: 1px solid var(--ink-3);
+  padding: 6mm;
+  position: relative;
+}
+.metric-label {
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  margin-bottom: 4mm;
+}
+.metric-value {
+  font-family: var(--display);
+  font-size: 28pt;
+  line-height: 1;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  color: var(--bone);
+  margin-bottom: 2mm;
+}
+.metric-value.bad { color: var(--rust-soft); }
+.metric-note {
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+}
+
+.pain-list { display: grid; gap: 3mm; margin-top: 8mm; }
+.pain {
+  display: grid;
+  grid-template-columns: 8mm 1fr;
+  gap: 4mm;
+  align-items: start;
+  padding-bottom: 3mm;
+  border-bottom: 1px solid var(--ink-3);
+}
+.pain-num {
+  font-family: var(--mono);
+  font-size: 8pt;
+  color: var(--rust);
+  letter-spacing: 0.16em;
+}
+.pain-text {
+  font-size: 9.5pt;
+  line-height: 1.55;
+}
+.pain-text strong {
+  font-family: var(--display);
+  font-weight: 500;
+  color: var(--bone);
+  font-style: italic;
+  font-variation-settings: "opsz" 36, "SOFT" 100, "WONK" 1;
+}
+
+/* ===========================
+   PAGE 4 — CONCEITO (cream)
+   =========================== */
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12mm;
+  align-items: start;
+  margin-top: 4mm;
+}
+.concept-list {
+  display: grid;
+  gap: 5mm;
+}
+.concept-item {
+  border-left: 2px solid var(--rust);
+  padding-left: 6mm;
+}
+.concept-item-label {
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 2mm;
+}
+.concept-item-text {
+  font-family: var(--display);
+  font-size: 13pt;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  color: var(--ink);
+}
+.concept-item-text em {
+  font-style: italic;
+  color: var(--rust);
+  font-variation-settings: "opsz" 36, "SOFT" 100, "WONK" 1;
+}
+
+.pull-quote {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 24pt;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+  color: var(--ink);
+  border-top: 1px solid rgba(10,9,7,0.2);
+  border-bottom: 1px solid rgba(10,9,7,0.2);
+  padding: 6mm 0;
+  position: relative;
+  margin-top: 4mm;
+}
+.pull-quote::before {
+  content: "“";
+  position: absolute;
+  top: -3mm;
+  left: -2mm;
+  font-size: 70pt;
+  color: var(--rust);
+  line-height: 1;
+  font-style: normal;
+}
+.pull-quote-by {
+  display: block;
+  font-family: var(--mono);
+  font-size: 7pt;
+  font-style: normal;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4mm;
+  opacity: 0.6;
+}
+
+/* ===========================
+   PAGE 5 — TIPOGRAFIA
+   =========================== */
+.type-spec {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10mm;
+  align-items: baseline;
+  padding: 6mm 0;
+  border-bottom: 1px solid var(--ink-3);
+}
+.type-spec-meta {
+  font-family: var(--mono);
+  font-size: 8pt;
+  letter-spacing: 0.16em;
+  color: var(--bone-3);
+  text-transform: uppercase;
+}
+.type-spec-meta strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 18pt;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--bone);
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  font-weight: 400;
+  margin-bottom: 2mm;
+}
+.type-sample-fraunces {
+  font-family: var(--display);
+  font-size: 56pt;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+  color: var(--bone);
+}
+.type-sample-fraunces .it { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: var(--rust); }
+.type-sample-manrope {
+  font-family: var(--body);
+  font-size: 14pt;
+  line-height: 1.4;
+  color: var(--bone);
+}
+.type-sample-mono {
+  font-family: var(--mono);
+  font-size: 10pt;
+  letter-spacing: 0.05em;
+  color: var(--bone);
+}
+
+/* ===========================
+   PAGE 6 — PALETA
+   =========================== */
+.palette {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4mm;
+  margin-top: 6mm;
+}
+.swatch {
+  border: 1px solid rgba(10,9,7,0.15);
+  height: 50mm;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 4mm;
+}
+.swatch-name {
+  font-family: var(--display);
+  font-size: 11pt;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  margin-bottom: 1mm;
+}
+.swatch-hex {
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  letter-spacing: 0.14em;
+  opacity: 0.7;
+}
+.swatch.s-ink   { background: #0A0907; color: var(--bone); }
+.swatch.s-ink2  { background: #14110D; color: var(--bone); }
+.swatch.s-bone  { background: #EBE3D1; color: var(--ink); }
+.swatch.s-paper { background: #E9DFC7; color: var(--ink); }
+.swatch.s-rust  { background: #C44A1F; color: var(--bone); }
+.swatch.s-rust-deep { background: #8C2F0F; color: var(--bone); }
+.swatch.s-ember { background: #E8A33A; color: var(--ink); }
+.swatch.s-moss  { background: #4F5638; color: var(--bone); }
+
+.palette-note {
+  margin-top: 6mm;
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  letter-spacing: 0.14em;
+  color: rgba(10,9,7,0.6);
+  text-transform: uppercase;
+}
+
+/* ===========================
+   PAGE 7 — STACK
+   =========================== */
+.stack-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+  margin-top: 4mm;
+}
+.stack-card {
+  border: 1px solid var(--ink-3);
+  padding: 6mm;
+}
+.stack-card-eyebrow {
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 3mm;
+}
+.stack-card-title {
+  font-family: var(--display);
+  font-size: 16pt;
+  line-height: 1.15;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  margin-bottom: 3mm;
+  color: var(--bone);
+}
+.stack-card-list {
+  list-style: none;
+  font-size: 8.5pt;
+  line-height: 1.5;
+  color: var(--bone-2);
+}
+.stack-card-list li { padding: 1.4mm 0; border-bottom: 1px solid var(--ink-3); }
+.stack-card-list li:last-child { border: 0; }
+.stack-card-list .key {
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.16em;
+  color: var(--bone-3);
+  text-transform: uppercase;
+  margin-right: 2mm;
+}
+
+/* ===========================
+   PAGE 8 — PERFORMANCE
+   =========================== */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8mm;
+  margin-top: 6mm;
+}
+.compare-col {
+  padding: 6mm;
+  border: 1px solid rgba(10,9,7,0.15);
+  background: var(--bone-2);
+}
+.compare-col.now {
+  background: var(--ink);
+  border-color: var(--ink-3);
+  color: var(--bone);
+}
+.compare-col.now .compare-label { color: var(--bone-3); }
+.compare-col.now .compare-num { color: var(--bone); }
+.compare-col.now .compare-num.good { color: var(--ember); }
+.compare-col.now .compare-bar { background: var(--ink-3); }
+.compare-col.now .compare-bar-fill { background: var(--rust); }
+
+.compare-eyebrow {
+  font-family: var(--mono);
+  font-size: 8pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 3mm;
+}
+.compare-col.was .compare-eyebrow { color: rgba(10,9,7,0.5); }
+.compare-title {
+  font-family: var(--display);
+  font-size: 22pt;
+  line-height: 1;
+  font-variation-settings: "opsz" 72, "SOFT" 30, "WONK" 1;
+  margin-bottom: 6mm;
+}
+.compare-col.was .compare-title { color: var(--ink); }
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  margin-bottom: 4mm;
+}
+.compare-label {
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(10,9,7,0.55);
+}
+.compare-num {
+  font-family: var(--display);
+  font-size: 18pt;
+  line-height: 1;
+  font-variation-settings: "opsz" 72, "WONK" 1;
+  color: var(--ink);
+}
+.compare-num.bad { color: var(--rust); }
+.compare-num.good { color: var(--moss); }
+.compare-bar {
+  grid-column: span 2;
+  height: 3px;
+  background: rgba(10,9,7,0.1);
+  position: relative;
+  margin-top: 1mm;
+}
+.compare-bar-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--rust);
+}
+
+.delta {
+  margin-top: 6mm;
+  display: flex;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 8.5pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  gap: 4mm;
+  align-items: center;
+}
+.delta strong {
+  font-family: var(--display);
+  font-size: 28pt;
+  font-style: italic;
+  color: var(--rust);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* ===========================
+   PAGE 9 — ESCOPO
+   =========================== */
+.scope-list {
+  display: grid;
+  gap: 0;
+  margin-top: 4mm;
+}
+.scope-row {
+  display: grid;
+  grid-template-columns: 12mm 1fr 36mm;
+  gap: 6mm;
+  align-items: center;
+  padding: 5mm 0;
+  border-bottom: 1px solid var(--ink-3);
+}
+.scope-row:last-child { border-bottom: 0; }
+.scope-num {
+  font-family: var(--mono);
+  font-size: 8pt;
+  letter-spacing: 0.16em;
+  color: var(--rust);
+}
+.scope-name {
+  font-family: var(--display);
+  font-size: 16pt;
+  line-height: 1.1;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  color: var(--bone);
+}
+.scope-name .sub {
+  display: block;
+  font-family: var(--body);
+  font-size: 9pt;
+  margin-top: 1.5mm;
+  color: var(--bone-3);
+  font-variation-settings: normal;
+}
+.scope-tag {
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--bone-3);
+}
+.scope-tag .yes { color: var(--ember); }
+
+/* ===========================
+   PAGE 10 — CRONOGRAMA
+   =========================== */
+.timeline {
+  margin-top: 6mm;
+}
+.tl-row {
+  display: grid;
+  grid-template-columns: 22mm 1fr 22mm;
+  gap: 4mm;
+  align-items: center;
+  padding: 4mm 0;
+  border-bottom: 1px solid var(--ink-3);
+}
+.tl-week {
+  font-family: var(--mono);
+  font-size: 8pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+}
+.tl-week strong {
+  font-family: var(--display);
+  font-size: 16pt;
+  display: block;
+  color: var(--bone);
+  font-style: italic;
+  font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+  margin-bottom: 1mm;
+  letter-spacing: -0.02em;
+}
+.tl-name {
+  font-family: var(--display);
+  font-size: 13pt;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  color: var(--bone);
+}
+.tl-name .sub {
+  display: block;
+  font-family: var(--body);
+  font-size: 8.5pt;
+  color: var(--bone-3);
+  margin-top: 1mm;
+  font-variation-settings: normal;
+}
+.tl-bar {
+  height: 4px;
+  background: var(--ink-3);
+  position: relative;
+  border-radius: 2px;
+}
+.tl-bar-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--rust);
+  border-radius: 2px;
+}
+
+/* ===========================
+   PAGE 11 — INVESTIMENTO
+   =========================== */
+.invest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+  margin-top: 6mm;
+}
+.invest-card {
+  border: 1px solid var(--ink-3);
+  padding: 8mm;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 110mm;
+}
+.invest-card.feat {
+  background: var(--ink-2);
+  border-color: var(--rust);
+}
+.invest-card.feat::before {
+  content: "RECOMENDADO";
+  position: absolute;
+  top: -3mm;
+  left: 6mm;
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.2em;
+  background: var(--rust);
+  color: var(--bone);
+  padding: 1.5mm 3mm;
+}
+.invest-tier {
+  font-family: var(--mono);
+  font-size: 8pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  margin-bottom: 4mm;
+}
+.invest-name {
+  font-family: var(--display);
+  font-size: 28pt;
+  line-height: 0.95;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  margin-bottom: 4mm;
+  color: var(--bone);
+}
+.invest-name em { font-style: italic; color: var(--rust); font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+.invest-price {
+  font-family: var(--display);
+  font-size: 22pt;
+  line-height: 1;
+  font-variation-settings: "opsz" 72, "WONK" 1;
+  color: var(--bone);
+  margin-bottom: 1mm;
+}
+.invest-price .small {
+  font-family: var(--mono);
+  font-size: 8pt;
+  font-style: normal;
+  margin-left: 2mm;
+  color: var(--bone-3);
+  letter-spacing: 0.14em;
+  font-variation-settings: normal;
+}
+.invest-period {
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  margin-bottom: 6mm;
+  padding-bottom: 6mm;
+  border-bottom: 1px solid var(--ink-3);
+}
+.invest-list {
+  list-style: none;
+  font-size: 8.5pt;
+  line-height: 1.5;
+  flex: 1;
+}
+.invest-list li {
+  padding: 1.6mm 0;
+  display: grid;
+  grid-template-columns: 4mm 1fr;
+  gap: 3mm;
+  align-items: start;
+}
+.invest-list li::before {
+  content: "✕";
+  color: var(--rust);
+  font-size: 8pt;
+}
+
+/* ===========================
+   PAGE 12 — CTA / CONTATO
+   =========================== */
+.cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background: var(--ink);
+  position: relative;
+}
+.cta::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(196,74,31,0.12), transparent 60%);
+  pointer-events: none;
+}
+.cta-body {
+  padding: 30mm 18mm 20mm;
+  position: relative;
+  z-index: 1;
+}
+.cta-headline {
+  font-family: var(--display);
+  font-size: 64pt;
+  line-height: 0.92;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  margin-bottom: 8mm;
+  letter-spacing: -0.04em;
+}
+.cta-headline em { font-style: italic; color: var(--rust); font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+
+.cta-text {
+  font-size: 11pt;
+  line-height: 1.55;
+  max-width: 130mm;
+  margin-bottom: 14mm;
+  color: var(--bone-2);
+}
+
+.cta-channels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+  border-top: 1px solid var(--ink-3);
+  padding-top: 8mm;
+}
+.cta-channel-label {
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  margin-bottom: 2mm;
+}
+.cta-channel-value {
+  font-family: var(--display);
+  font-size: 14pt;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  color: var(--bone);
+}
+
+.cta-foot {
+  background: var(--ink-2);
+  padding: 8mm 18mm;
+  font-family: var(--mono);
+  font-size: 7pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--ink-3);
+}
+.cta-foot .red { color: var(--rust); }
+
+.cta-mark {
+  font-family: var(--display);
+  font-size: 70pt;
+  line-height: 0.85;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+  letter-spacing: -0.04em;
+  color: var(--bone);
+  margin: 12mm 0 12mm;
+}
+.cta-mark .it { font-style: italic; display: block; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+.cta-mark .red { color: var(--rust); }
+
+</style>
+</head>
+<body>
+
+<!-- ============== PAGE 1 — COVER ============== -->
+<section class="page cover">
+  <header class="cover-meta-top">
+    <span>Estúdio Espelho · Proposta confidencial</span>
+    <span>07.05.2026 · Doc. <span class="tnum">001</span> / <span class="tnum">001</span></span>
+  </header>
+
+  <div class="cover-body">
+    <span class="cover-tag">Proposta · Redesign do site oficial</span>
+
+    <h1 class="cover-title">
+      <span class="lauana">Lauana</span>
+      <span class="prado">Prado</span>
+    </h1>
+
+    <p class="cover-sub">
+      Um site à altura do palco. Editorial, rápido, autoral —
+      <em>como a artista, e não como a plataforma</em> que o hospeda.
+    </p>
+
+    <div class="cover-foot">
+      <div>
+        <div class="cover-foot-block-label">Cliente</div>
+        <div class="cover-foot-block-value">Lauana Prado · Equipe</div>
+      </div>
+      <div>
+        <div class="cover-foot-block-label">Escopo</div>
+        <div class="cover-foot-block-value">Redesign + reconstrução técnica</div>
+      </div>
+      <div>
+        <div class="cover-foot-block-label">Validade</div>
+        <div class="cover-foot-block-value tnum">30 dias</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PAGE 2 — SUMÁRIO ============== -->
+<section class="page">
+  <div class="page-chrome-top">
+    <span class="page-mark">Lauana Prado · Proposta</span>
+    <span>p. <span class="tnum">02</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§00 · Sumário</div>
+    <h2 class="section-title">O que tem <em>aqui dentro</em>.</h2>
+
+    <p class="lede">
+      Doze páginas. Um diagnóstico, uma direção, um plano. Tudo pensado para entregar não só um site novo — mas o site certo.
+    </p>
+
+    <div class="toc-list">
+      <div class="toc-item"><span class="toc-num">§01</span><span class="toc-name">Diagnóstico do site <em>atual</em></span><span class="toc-page">p. 03</span></div>
+      <div class="toc-item"><span class="toc-num">§02</span><span class="toc-name">Conceito e direção <em>criativa</em></span><span class="toc-page">p. 04</span></div>
+      <div class="toc-item"><span class="toc-num">§03</span><span class="toc-name">Sistema de <em>tipografia</em></span><span class="toc-page">p. 05</span></div>
+      <div class="toc-item"><span class="toc-num">§04</span><span class="toc-name">Paleta de <em>cores</em></span><span class="toc-page">p. 06</span></div>
+      <div class="toc-item"><span class="toc-num">§05</span><span class="toc-name">Stack <em>técnica</em></span><span class="toc-page">p. 07</span></div>
+      <div class="toc-item"><span class="toc-num">§06</span><span class="toc-name">Performance · <em>antes / depois</em></span><span class="toc-page">p. 08</span></div>
+      <div class="toc-item"><span class="toc-num">§07</span><span class="toc-name">Escopo & <em>entregáveis</em></span><span class="toc-page">p. 09</span></div>
+      <div class="toc-item"><span class="toc-num">§08</span><span class="toc-name">Cronograma de <em>execução</em></span><span class="toc-page">p. 10</span></div>
+      <div class="toc-item"><span class="toc-num">§09</span><span class="toc-name">Investimento e <em>planos</em></span><span class="toc-page">p. 11</span></div>
+      <div class="toc-item"><span class="toc-num">§10</span><span class="toc-name">Próximos <em>passos</em></span><span class="toc-page">p. 12</span></div>
+    </div>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 3 — DIAGNÓSTICO ============== -->
+<section class="page">
+  <div class="page-chrome-top">
+    <span class="page-mark">§01 · Diagnóstico</span>
+    <span>p. <span class="tnum">03</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§01 · Diagnóstico</div>
+    <h2 class="section-title">O site atual <em>não acompanha</em>.</h2>
+
+    <p class="lede">
+      O lauanaprado.com.br hoje é um template Wix sobre um motor pesado. Funciona, mas trabalha contra a artista — em performance, em estética, e em controle editorial.
+    </p>
+
+    <div class="metric-grid">
+      <div class="metric">
+        <div class="metric-label">First Contentful Paint</div>
+        <div class="metric-value bad tnum">~4.5s</div>
+        <div class="metric-note">3× acima do recomendado pelo Google</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Recursos carregados</div>
+        <div class="metric-value bad tnum">138</div>
+        <div class="metric-note">Bundle completo Wix Thunderbolt</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Controle editorial</div>
+        <div class="metric-value bad">Limitado</div>
+        <div class="metric-note">Preso ao editor visual da plataforma</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Identidade visual</div>
+        <div class="metric-value bad">Genérica</div>
+        <div class="metric-note">Tipografia e layout de template</div>
+      </div>
+    </div>
+
+    <div class="pain-list">
+      <div class="pain">
+        <span class="pain-num tnum">01</span>
+        <p class="pain-text"><strong>Lentidão estrutural</strong> — o Wix Thunderbolt carrega ~138 recursos por página e atinge FCP perto de 4,5s. O fã abre o site no celular durante a turnê e desiste antes da agenda renderizar.</p>
+      </div>
+      <div class="pain">
+        <span class="pain-num tnum">02</span>
+        <p class="pain-text"><strong>Dependência da plataforma</strong> — não há código próprio. Tudo (hospedagem, tipografia, formulário, e-commerce embrionário) está amarrado à infraestrutura Wix. Não há saída fácil.</p>
+      </div>
+      <div class="pain">
+        <span class="pain-num tnum">03</span>
+        <p class="pain-text"><strong>Estética de template</strong> — o site visualmente se confunde com qualquer outro projeto Wix. A artista, que reescreveu o sertanejo feminino, merece uma fachada digital com a mesma autoria.</p>
+      </div>
+      <div class="pain">
+        <span class="pain-num tnum">04</span>
+        <p class="pain-text"><strong>Sem leitura editorial</strong> — não há hierarquia clara entre lançamento, agenda, biografia. Tudo compete no mesmo plano. A turnê esconde a música, e a música esconde a artista.</p>
+      </div>
+      <div class="pain">
+        <span class="pain-num tnum">05</span>
+        <p class="pain-text"><strong>Loja sem destino</strong> — existe um carrinho ativo (<code style="font-family:var(--mono);font-size:8pt">/cart-page</code>) sem loja real conectada. Funcionalidade pela metade, abandonada.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 4 — CONCEITO (cream) ============== -->
+<section class="page cream">
+  <div class="page-chrome-top">
+    <span class="page-mark">§02 · Conceito</span>
+    <span>p. <span class="tnum">04</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§02 · Direção criativa</div>
+    <h2 class="section-title">Cartaz de <em>turnê</em>, encontrando revista.</h2>
+
+    <p class="lede">
+      Um sistema editorial cinematográfico — tipografia massiva, dados tabulares grandes, fundo de tinta com momentos em papel-creme. Sertanejo de noite, em letterpress.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-list">
+        <div class="concept-item">
+          <div class="concept-item-label">Tom</div>
+          <p class="concept-item-text">Editorial cinematográfico — <em>cartaz de turnê</em> meets revista de moda noturna.</p>
+        </div>
+        <div class="concept-item">
+          <div class="concept-item-label">Modo</div>
+          <p class="concept-item-text">Escuro como predominante. Uma seção em <em>papel-creme</em> para a biografia.</p>
+        </div>
+        <div class="concept-item">
+          <div class="concept-item-label">Hierarquia</div>
+          <p class="concept-item-text">Tipografia gigante. Dados tabulares. Listas longas <em>em vez</em> de cards.</p>
+        </div>
+        <div class="concept-item">
+          <div class="concept-item-label">Detalhe</div>
+          <p class="concept-item-text">Grain overlay, marquee de single, eixos variáveis WONK e SOFT no Fraunces para <em>caráter</em>.</p>
+        </div>
+      </div>
+
+      <div>
+        <blockquote class="pull-quote">
+          O site não imita a artista. Ele se comporta como o palco dela:<br/>
+          <em class="it">escuro, alto, autoral.</em>
+          <span class="pull-quote-by">— Direção criativa, Estúdio Espelho</span>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 5 — TIPOGRAFIA ============== -->
+<section class="page">
+  <div class="page-chrome-top">
+    <span class="page-mark">§03 · Tipografia</span>
+    <span>p. <span class="tnum">05</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§03 · Sistema de tipografia</div>
+    <h2 class="section-title">Três <em>famílias</em>. Uma voz.</h2>
+
+    <p class="lede">
+      Tipos com caráter — não os usuais Inter, Roboto, Arial. O Fraunces dá personalidade nos eixos WONK e SOFT; Manrope sustenta o corpo; DM Mono carimba os dados.
+    </p>
+
+    <div class="type-spec">
+      <div class="type-spec-meta">
+        <strong>Fraunces</strong>
+        Display · serif variável<br/>
+        opsz · SOFT · WONK<br/>
+        Reg / It · 200–900
+      </div>
+      <div class="type-sample-fraunces">
+        <span class="it">Lauana</span>Prado.
+      </div>
+    </div>
+
+    <div class="type-spec">
+      <div class="type-spec-meta">
+        <strong>Manrope</strong>
+        Body · sans humanista<br/>
+        300–700<br/>
+        Corpo de leitura
+      </div>
+      <div class="type-sample-manrope">
+        Cantora, compositora e dona da voz que reescreveu o sertanejo feminino brasileiro nos últimos sete anos. Texto corrido em Manrope para legibilidade longa, com ritmo levemente humanista.
+      </div>
+    </div>
+
+    <div class="type-spec">
+      <div class="type-spec-meta">
+        <strong>DM Mono</strong>
+        Tabular · monoespaçada<br/>
+        300–500<br/>
+        Datas, durações, labels
+      </div>
+      <div class="type-sample-mono">
+        14 · MAI · 2026 · GOIÂNIA / GO<br/>
+        04:11 · 12M VIEWS · COBAIA<br/>
+        BOOKING · IMPRENSA · PARCERIAS
+      </div>
+    </div>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 6 — PALETA (cream) ============== -->
+<section class="page cream">
+  <div class="page-chrome-top">
+    <span class="page-mark">§04 · Cores</span>
+    <span>p. <span class="tnum">06</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§04 · Paleta</div>
+    <h2 class="section-title">Tinta, osso, <em>ferrugem</em>.</h2>
+
+    <p class="lede">
+      Uma paleta dramática, feminina e brasileira — sem cair no clichê do violeta-em-branco da web genérica. Ferrugem como acento único e raro.
+    </p>
+
+    <div class="palette">
+      <div class="swatch s-ink">
+        <div class="swatch-name">Tinta</div>
+        <div class="swatch-hex">#0A0907</div>
+      </div>
+      <div class="swatch s-ink2">
+        <div class="swatch-name">Tinta · 2</div>
+        <div class="swatch-hex">#14110D</div>
+      </div>
+      <div class="swatch s-bone">
+        <div class="swatch-name">Osso</div>
+        <div class="swatch-hex">#EBE3D1</div>
+      </div>
+      <div class="swatch s-paper">
+        <div class="swatch-name">Papel</div>
+        <div class="swatch-hex">#E9DFC7</div>
+      </div>
+      <div class="swatch s-rust">
+        <div class="swatch-name">Ferrugem</div>
+        <div class="swatch-hex">#C44A1F</div>
+      </div>
+      <div class="swatch s-rust-deep">
+        <div class="swatch-name">Ferrugem · profunda</div>
+        <div class="swatch-hex">#8C2F0F</div>
+      </div>
+      <div class="swatch s-ember">
+        <div class="swatch-name">Brasa</div>
+        <div class="swatch-hex">#E8A33A</div>
+      </div>
+      <div class="swatch s-moss">
+        <div class="swatch-name">Musgo</div>
+        <div class="swatch-hex">#4F5638</div>
+      </div>
+    </div>
+
+    <p class="palette-note">
+      Acento <em class="it">ferrugem</em> aparece em ≤ 5% de qualquer tela — só em chamadas críticas, links, indicadores ao vivo. Brasa e musgo são reservas para tags de status. O resto é tinta sobre osso.
+    </p>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 7 — STACK ============== -->
+<section class="page">
+  <div class="page-chrome-top">
+    <span class="page-mark">§05 · Stack</span>
+    <span>p. <span class="tnum">07</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§05 · Stack técnica</div>
+    <h2 class="section-title">Sair do Wix, ir <em>pra estrada</em>.</h2>
+
+    <p class="lede">
+      Reconstrução em Next.js 15 com TypeScript — server components onde dá pra ser estático, client components onde precisa interagir. Hospedagem em CDN global, controle 100% próprio.
+    </p>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">Frontend</div>
+        <h3 class="stack-card-title">Next.js 15 · React 19</h3>
+        <ul class="stack-card-list">
+          <li><span class="key">App Router</span>Roteamento por arquivo, server-first</li>
+          <li><span class="key">RSC</span>Componentes server-render por padrão</li>
+          <li><span class="key">TS 5.7</span>Tipagem estática completa</li>
+          <li><span class="key">CSS</span>Sistema próprio, sem framework genérico</li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">Hospedagem</div>
+        <h3 class="stack-card-title">Vercel · CDN global</h3>
+        <ul class="stack-card-list">
+          <li><span class="key">Edge</span>Páginas estáticas distribuídas</li>
+          <li><span class="key">SSL</span>HTTPS automático</li>
+          <li><span class="key">Domínio</span>lauanaprado.com.br · DNS migrado</li>
+          <li><span class="key">CI/CD</span>Deploy automático via GitHub</li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">Conteúdo</div>
+        <h3 class="stack-card-title">CMS leve · headless</h3>
+        <ul class="stack-card-list">
+          <li><span class="key">Shows</span>Editáveis pela equipe sem dev</li>
+          <li><span class="key">Lançamentos</span>Auto-fetch Spotify/YT</li>
+          <li><span class="key">Press kit</span>Mídia centralizada</li>
+          <li><span class="key">Analytics</span>Plausible (privacy-first)</li>
+        </ul>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">Integrações</div>
+        <h3 class="stack-card-title">Conexões externas</h3>
+        <ul class="stack-card-list">
+          <li><span class="key">YouTube</span>Embed lazy, sem cookie até clicar</li>
+          <li><span class="key">Spotify</span>Player oficial inline</li>
+          <li><span class="key">Instagram</span>Feed via API</li>
+          <li><span class="key">Loja</span>Shopify ou Stripe (a definir)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 8 — PERFORMANCE ============== -->
+<section class="page cream">
+  <div class="page-chrome-top">
+    <span class="page-mark">§06 · Performance</span>
+    <span>p. <span class="tnum">08</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§06 · Antes / depois</div>
+    <h2 class="section-title">Ganho de <em>3 a 4×</em> em todas as métricas.</h2>
+
+    <p class="lede">
+      Comparação direta entre o site atual em Wix e a build Next.js servida em CDN. Números medidos em rede 4G simulada, hardware mid-tier.
+    </p>
+
+    <div class="compare-grid">
+      <div class="compare-col was">
+        <div class="compare-eyebrow">SITE ATUAL · WIX</div>
+        <div class="compare-title">Hoje</div>
+
+        <div class="compare-row"><span class="compare-label">First Contentful Paint</span><span class="compare-num bad tnum">4.5s</span><div class="compare-bar"><div class="compare-bar-fill" style="width:90%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">Time to Interactive</span><span class="compare-num bad tnum">7.2s</span><div class="compare-bar"><div class="compare-bar-fill" style="width:95%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">Total Blocking Time</span><span class="compare-num bad tnum">820ms</span><div class="compare-bar"><div class="compare-bar-fill" style="width:75%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">Recursos · primeira tela</span><span class="compare-num bad tnum">138</span><div class="compare-bar"><div class="compare-bar-fill" style="width:90%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">JavaScript · gzip</span><span class="compare-num bad tnum">1.2 MB</span><div class="compare-bar"><div class="compare-bar-fill" style="width:88%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">Lighthouse · perf</span><span class="compare-num bad tnum">38</span><div class="compare-bar"><div class="compare-bar-fill" style="width:38%"></div></div></div>
+      </div>
+
+      <div class="compare-col now">
+        <div class="compare-eyebrow">PROPOSTA · NEXT.JS</div>
+        <div class="compare-title">Depois</div>
+
+        <div class="compare-row"><span class="compare-label">First Contentful Paint</span><span class="compare-num good tnum">~0.9s</span><div class="compare-bar"><div class="compare-bar-fill" style="width:18%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">Time to Interactive</span><span class="compare-num good tnum">~1.8s</span><div class="compare-bar"><div class="compare-bar-fill" style="width:24%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">Total Blocking Time</span><span class="compare-num good tnum">~120ms</span><div class="compare-bar"><div class="compare-bar-fill" style="width:14%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">Recursos · primeira tela</span><span class="compare-num good tnum">~24</span><div class="compare-bar"><div class="compare-bar-fill" style="width:17%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">JavaScript · gzip</span><span class="compare-num good tnum">~105 kB</span><div class="compare-bar"><div class="compare-bar-fill" style="width:9%"></div></div></div>
+        <div class="compare-row"><span class="compare-label">Lighthouse · perf</span><span class="compare-num good tnum">96+</span><div class="compare-bar"><div class="compare-bar-fill" style="width:96%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="delta">
+      <span>Redução média de carga ·</span><strong>−78%</strong><span>· Lighthouse</span><strong>+58 pts</strong>
+    </div>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 9 — ESCOPO ============== -->
+<section class="page">
+  <div class="page-chrome-top">
+    <span class="page-mark">§07 · Escopo</span>
+    <span>p. <span class="tnum">09</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§07 · Escopo & entregáveis</div>
+    <h2 class="section-title">O que <em>está incluso</em>.</h2>
+
+    <p class="lede">
+      Reconstrução completa do site oficial e das peças relacionadas. Estrutura editorial, sistema de design completo, deploy ao vivo, documentação para a equipe.
+    </p>
+
+    <div class="scope-list">
+      <div class="scope-row">
+        <span class="scope-num tnum">01</span>
+        <div class="scope-name">Hero · página inicial<span class="sub">Tipografia gigante, marquee de single, retrato editorial, dados de turnê</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+      <div class="scope-row">
+        <span class="scope-num tnum">02</span>
+        <div class="scope-name">Biografia · seção em papel-creme<span class="sub">Bio editorial, citação, fatos rápidos, foto de arquivo</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+      <div class="scope-row">
+        <span class="scope-num tnum">03</span>
+        <div class="scope-name">Lançamentos · grid assimétrico<span class="sub">7 capas direcionadas, integração futura com Spotify</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+      <div class="scope-row">
+        <span class="scope-num tnum">04</span>
+        <div class="scope-name">Vídeos · filmstrip horizontal<span class="sub">YouTube lazy-load, sem cookie até o play</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+      <div class="scope-row">
+        <span class="scope-num tnum">05</span>
+        <div class="scope-name">Agenda · listagem tabular<span class="sub">Datas, cidade, venue, status (esgotado / ingressos / em breve)</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+      <div class="scope-row">
+        <span class="scope-num tnum">06</span>
+        <div class="scope-name">Loja · vitrine inicial<span class="sub">CTA destacando merch + integração futura com plataforma</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+      <div class="scope-row">
+        <span class="scope-num tnum">07</span>
+        <div class="scope-name">Contato · booking + imprensa<span class="sub">Canais por categoria + formulário com validação</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+      <div class="scope-row">
+        <span class="scope-num tnum">08</span>
+        <div class="scope-name">CMS leve · edição sem desenvolvedor<span class="sub">Shows, lançamentos e textos editáveis pela equipe</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+      <div class="scope-row">
+        <span class="scope-num tnum">09</span>
+        <div class="scope-name">Hospedagem · 12 meses<span class="sub">CDN global, SSL, monitoramento, deploys automáticos</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+      <div class="scope-row">
+        <span class="scope-num tnum">10</span>
+        <div class="scope-name">Press kit & guia de marca<span class="sub">PDF + assets, padrão para imprensa e parcerias</span></div>
+        <div class="scope-tag"><span class="yes">Incluído</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 10 — CRONOGRAMA ============== -->
+<section class="page">
+  <div class="page-chrome-top">
+    <span class="page-mark">§08 · Cronograma</span>
+    <span>p. <span class="tnum">10</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§08 · Cronograma</div>
+    <h2 class="section-title">Seis <em>semanas</em>, do briefing ao ar.</h2>
+
+    <p class="lede">
+      Marcos previsíveis, com pontos de aprovação ao fim de cada fase. A equipe da artista entra ativa nas semanas 02, 04 e 05 — o resto é estúdio.
+    </p>
+
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-week"><strong>Sem. <span class="tnum">01</span></strong>Descoberta</div>
+        <div class="tl-name">Briefing aprofundado, auditoria do conteúdo atual<span class="sub">Acesso a banco de fotos, vídeos, lista de shows; mapeamento de stakeholders</span></div>
+        <div class="tl-bar"><div class="tl-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-week"><strong>Sem. <span class="tnum">02</span></strong>Direção</div>
+        <div class="tl-name">Direção criativa apresentada e aprovada<span class="sub">Moodboard, paleta, espécimes tipográficos, exemplos de tela; aprovação da artista</span></div>
+        <div class="tl-bar"><div class="tl-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-week"><strong>Sem. <span class="tnum">03</span></strong>Design</div>
+        <div class="tl-name">Wireframes finos + arte final de todas as seções<span class="sub">Hero, bio, lançamentos, vídeos, agenda, loja, contato — prontos em alta fidelidade</span></div>
+        <div class="tl-bar"><div class="tl-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-week"><strong>Sem. <span class="tnum">04</span></strong>Build</div>
+        <div class="tl-name">Reconstrução técnica em Next.js + integrações<span class="sub">Componentes, CMS, Spotify/YouTube, formulário, analytics; staging com domínio temporário</span></div>
+        <div class="tl-bar"><div class="tl-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-week"><strong>Sem. <span class="tnum">05</span></strong>QA</div>
+        <div class="tl-name">Revisão da equipe, ajustes, testes em dispositivos<span class="sub">Mobile, tablet, desktop; performance Lighthouse; SEO; acessibilidade básica</span></div>
+        <div class="tl-bar"><div class="tl-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-week"><strong>Sem. <span class="tnum">06</span></strong>Lançamento</div>
+        <div class="tl-name">Go-live + treinamento da equipe<span class="sub">Migração do domínio, redirects, treinamento de 1h para edições futuras, press kit final</span></div>
+        <div class="tl-bar"><div class="tl-bar-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 11 — INVESTIMENTO ============== -->
+<section class="page">
+  <div class="page-chrome-top">
+    <span class="page-mark">§09 · Investimento</span>
+    <span>p. <span class="tnum">11</span></span>
+  </div>
+
+  <div class="page-body">
+    <div class="section-no">§09 · Investimento</div>
+    <h2 class="section-title">Dois caminhos. <em>Mesma direção.</em></h2>
+
+    <p class="lede">
+      Os números abaixo são uma referência inicial — fechamento se ajusta a escopo final, prazos e integrações específicas. Pagamento parcelado, em três entradas.
+    </p>
+
+    <div class="invest-grid">
+      <div class="invest-card">
+        <div class="invest-tier">Plano · Essencial</div>
+        <h3 class="invest-name">Site novo, <em>ao ar</em>.</h3>
+        <div class="invest-price">R$ 28.000<span class="small">à vista</span></div>
+        <div class="invest-period">Entrega em 6 semanas · 3× R$ 9.500</div>
+        <ul class="invest-list">
+          <li>Redesign completo das 7 seções</li>
+          <li>Reconstrução técnica em Next.js 15</li>
+          <li>Hospedagem em CDN · 12 meses</li>
+          <li>Domínio migrado · SSL · DNS</li>
+          <li>Edição básica de shows pela equipe</li>
+          <li>Press kit em PDF</li>
+          <li>Suporte de bugs · 30 dias pós-lançamento</li>
+        </ul>
+      </div>
+
+      <div class="invest-card feat">
+        <div class="invest-tier">Plano · Estrada</div>
+        <h3 class="invest-name">Site novo + <em>parceria</em> contínua.</h3>
+        <div class="invest-price">R$ 42.000<span class="small">à vista</span></div>
+        <div class="invest-period">Entrega 6 sem. · + 12 meses parceria</div>
+        <ul class="invest-list">
+          <li>Tudo do plano Essencial</li>
+          <li>CMS completo · todas as seções editáveis</li>
+          <li>Integração Spotify + YouTube + Instagram</li>
+          <li>Loja inicial conectada (Shopify ou Stripe)</li>
+          <li>Analytics Plausible com painel mensal</li>
+          <li>Iterações de design · até 8h/mês por 12 meses</li>
+          <li>Atualizações de turnê · prioridade 24h</li>
+          <li>Relatório editorial trimestral</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-chrome-bottom">
+    <span>Estúdio Espelho · 2026</span>
+    <span class="tnum">07.05.2026</span>
+  </div>
+</section>
+
+<!-- ============== PAGE 12 — CTA ============== -->
+<section class="page cta">
+  <div class="cta-body">
+    <span class="eyebrow rust">§10 · Próximo passo</span>
+
+    <h2 class="cta-headline">
+      Vamos <em>conversar</em>.
+    </h2>
+
+    <p class="cta-text">
+      Esta proposta é o começo. Tudo aqui dentro pode (e deve) ser ajustado conforme a equipe e a artista responderem ao material. O que precisamos a seguir é uma reunião de 45 minutos — pra alinhar tom, prazos e prioridades.
+    </p>
+
+    <div class="cta-channels">
+      <div>
+        <div class="cta-channel-label">Direção criativa</div>
+        <div class="cta-channel-value">Estúdio Espelho<br/><span class="mono" style="font-size:9pt; letter-spacing:0.1em; opacity:0.7">contato@estudioespelho.com.br</span></div>
+      </div>
+      <div>
+        <div class="cta-channel-label">WhatsApp · Direto</div>
+        <div class="cta-channel-value">+55 (11) 9 8888-7777<br/><span class="mono" style="font-size:9pt; letter-spacing:0.1em; opacity:0.7">Resposta em 1 dia útil</span></div>
+      </div>
+    </div>
+
+    <div class="cta-mark" aria-hidden="true">
+      <span class="it">Lauana</span>
+      <span>Prado<span class="red">.</span></span>
+    </div>
+  </div>
+
+  <div class="cta-foot">
+    <span>Proposta confidencial · Estúdio Espelho · 2026</span>
+    <span>Doc. <span class="tnum">001</span> · Validade <span class="tnum">30</span> dias</span>
+  </div>
+</section>
+
+</body>
+</html>

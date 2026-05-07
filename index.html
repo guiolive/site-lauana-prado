@@ -1,0 +1,2392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lauana Prado — Site Oficial</title>
+<meta name="description" content="Site oficial de Lauana Prado. Turnê Espelho 2026, lançamentos, vídeos, agenda de shows e contato." />
+<meta name="theme-color" content="#0A0907" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ========================================================
+   1. TOKENS
+   ======================================================== */
+:root {
+  /* paper / dark theme */
+  --ink:        #0A0907;
+  --ink-2:      #14110D;
+  --ink-3:      #1E1A14;
+  --bone:       #EBE3D1;
+  --bone-2:     #D8CFB9;
+  --bone-3:     #B5AB91;
+  --paper:      #E9DFC7;
+  --paper-2:    #DACDB0;
+  --rust:       #C44A1F;
+  --rust-deep:  #8C2F0F;
+  --rust-soft:  #E0735A;
+  --ember:      #E8A33A;
+  --moss:       #4F5638;
+
+  --grain-opacity: 0.06;
+
+  /* type */
+  --display: "Fraunces", "Times New Roman", serif;
+  --body:    "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:    "DM Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  /* spacing */
+  --pad-x: clamp(1.25rem, 4vw, 4rem);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+/* ========================================================
+   2. RESET & BASE
+   ======================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  background: var(--ink);
+  color: var(--bone);
+  overflow-x: hidden;
+  position: relative;
+}
+
+img, video, iframe { display: block; max-width: 100%; }
+button, input, textarea { font-family: inherit; color: inherit; background: none; border: none; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+::selection { background: var(--rust); color: var(--bone); }
+
+/* Grain overlay applied to body — a single layered noise */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ========================================================
+   3. TYPOGRAPHY UTILITIES
+   ======================================================== */
+.display {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.86;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+}
+
+.display-italic {
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.serif { font-family: var(--display); }
+.mono  { font-family: var(--mono);    font-feature-settings: "tnum", "ss01"; }
+.sans  { font-family: var(--body);    }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.6rem; height: 1px;
+  background: currentColor;
+  display: inline-block;
+}
+
+.tnum { font-feature-settings: "tnum", "ss01"; }
+
+/* ========================================================
+   4. LAYOUT PRIMITIVES
+   ======================================================== */
+.container {
+  width: 100%;
+  padding: 0 var(--pad-x);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bone-3), transparent);
+  opacity: 0.25;
+}
+
+section { position: relative; }
+
+/* Vertical section index that stays in left margin */
+.section-mark {
+  position: absolute;
+  top: 2rem;
+  left: var(--pad-x);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 2;
+}
+.section-mark::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--rust);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ========================================================
+   5. NAV
+   ======================================================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1rem var(--pad-x);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 2rem;
+  background: linear-gradient(180deg, rgba(10,9,7,0.85), rgba(10,9,7,0));
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+}
+
+.nav-mark {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 36, "WONK" 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-mark .glyph {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--rust);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%      { transform: scale(0.6); opacity: 0.5; }
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.nav-links a {
+  position: relative;
+  padding: 0.5rem 0;
+  color: var(--bone-2);
+  transition: color 0.3s var(--ease-out);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: 0.2rem;
+  height: 1px;
+  background: var(--rust);
+  transition: right 0.4s var(--ease-out);
+}
+
+.nav-links a:hover {
+  color: var(--bone);
+}
+.nav-links a:hover::after { right: 0; }
+
+.nav-streams {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--bone-3);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+.nav-cta:hover {
+  background: var(--rust);
+  color: var(--bone);
+  border-color: var(--rust);
+}
+.nav-cta .arrow { transition: transform 0.4s var(--ease-out); }
+.nav-cta:hover .arrow { transform: translateX(3px) rotate(-45deg); }
+
+@media (max-width: 880px) {
+  .nav { grid-template-columns: auto 1fr auto; }
+  .nav-links { display: none; }
+}
+
+/* ========================================================
+   6. HERO
+   ======================================================== */
+.hero {
+  min-height: 100vh;
+  padding: 8rem var(--pad-x) 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto auto;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 3rem;
+  align-items: end;
+  position: relative;
+}
+
+@media (max-width: 880px) {
+  .hero-grid { grid-template-columns: 1fr; }
+}
+
+.hero-headline {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+}
+
+.hero-meta-right {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.hero-name {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(4.5rem, 15vw, 17rem);
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  color: var(--bone);
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+}
+
+.hero-name .lauana {
+  display: block;
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.hero-name .prado {
+  display: block;
+  letter-spacing: -0.045em;
+  position: relative;
+}
+
+.hero-name .prado::after {
+  content: "*";
+  font-size: 0.4em;
+  vertical-align: super;
+  color: var(--rust);
+  margin-left: 0.05em;
+  font-style: normal;
+  display: inline-block;
+  animation: spin 12s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.hero-tagline {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  line-height: 1.35;
+  color: var(--bone-2);
+  max-width: 32rem;
+  margin-top: 1.6rem;
+  font-variation-settings: "opsz" 24, "SOFT" 100, "WONK" 1;
+}
+
+.hero-tagline em {
+  color: var(--rust-soft);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.hero-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-self: end;
+}
+
+.hero-portrait {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: var(--ink-3);
+  border: 1px solid var(--ink-3);
+  overflow: hidden;
+  filter: contrast(1.05) brightness(0.95);
+}
+
+.hero-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.15) contrast(1.1) brightness(0.85) saturate(0.85);
+  mix-blend-mode: luminosity;
+}
+
+.hero-portrait::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 50%, rgba(10,9,7,0.6));
+}
+
+.hero-portrait-tag {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone);
+  display: flex;
+  justify-content: space-between;
+}
+.hero-portrait-tag .red { color: var(--rust-soft); }
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  border-top: 1px solid var(--ink-3);
+  padding-top: 1rem;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.hero-stat-num {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1;
+  font-variation-settings: "opsz" 72, "WONK" 1;
+  color: var(--bone);
+}
+.hero-stat-label {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+}
+
+/* Hero actions row */
+.hero-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.btn {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 1rem 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: all 0.4s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--rust);
+  color: var(--bone);
+}
+.btn-primary:hover { background: var(--rust-deep); transform: translateY(-2px); }
+
+.btn-ghost {
+  border: 1px solid var(--bone-3);
+  color: var(--bone);
+}
+.btn-ghost:hover {
+  background: var(--bone);
+  color: var(--ink);
+  border-color: var(--bone);
+}
+
+.btn .arrow {
+  display: inline-block;
+  transition: transform 0.4s var(--ease-out);
+}
+.btn:hover .arrow { transform: translateX(4px); }
+
+/* Marquee — bottom of hero */
+.marquee {
+  border-top: 1px solid var(--ink-3);
+  border-bottom: 1px solid var(--ink-3);
+  overflow: hidden;
+  position: relative;
+  margin: 4rem calc(-1 * var(--pad-x)) 0;
+  padding: 1.2rem 0;
+  background: var(--ink-2);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: marquee 40s linear infinite;
+  font-family: var(--display);
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  color: var(--bone);
+}
+
+.marquee-track .red { color: var(--rust); }
+.marquee-track .glyph {
+  display: inline-block;
+  width: 0.7em; height: 0.7em;
+  background: var(--rust);
+  border-radius: 50%;
+  margin: 0 0.4em;
+  vertical-align: middle;
+  transform: translateY(-0.05em);
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* Hero background ornament */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -30%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(196,74,31,0.1), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========================================================
+   7. SOBRE (cream paper section)
+   ======================================================== */
+.sobre {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 8rem var(--pad-x);
+  position: relative;
+}
+
+.sobre::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30px;
+  background: linear-gradient(180deg, var(--ink), transparent);
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (max-width: 880px) {
+  .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+.sobre-aside {
+  position: sticky;
+  top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sobre-photo {
+  aspect-ratio: 3 / 4;
+  background: var(--paper-2);
+  overflow: hidden;
+  position: relative;
+  border-radius: 0;
+}
+
+.sobre-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.18) contrast(1.05) saturate(0.9);
+}
+
+.sobre-photo-cap {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.6;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sobre-body {
+  position: relative;
+}
+
+.sobre-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rust);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+.sobre-eyebrow::before {
+  content: ""; width: 1.6rem; height: 1px;
+  background: var(--rust);
+}
+
+.sobre-headline {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  margin-bottom: 2.5rem;
+}
+
+.sobre-headline em {
+  font-style: italic;
+  color: var(--rust);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.sobre-text {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--ink);
+  max-width: 36rem;
+}
+
+.sobre-text p { margin-bottom: 1.2rem; }
+
+.sobre-text p:first-child::first-letter {
+  font-family: var(--display);
+  font-size: 5rem;
+  line-height: 0.85;
+  float: left;
+  margin: 0.1rem 0.6rem -0.2rem 0;
+  color: var(--rust);
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  font-weight: 500;
+}
+
+.sobre-quote {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  line-height: 1.3;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+  border-top: 1px solid rgba(10,9,7,0.2);
+  border-bottom: 1px solid rgba(10,9,7,0.2);
+  padding: 2rem 0;
+  margin: 2.5rem 0;
+  position: relative;
+}
+
+.sobre-quote::before {
+  content: "“";
+  position: absolute;
+  left: -0.5em;
+  top: -0.2em;
+  font-size: 4em;
+  color: var(--rust);
+  line-height: 1;
+  font-style: normal;
+}
+
+.sobre-quote-by {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-style: normal;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.6;
+  margin-top: 1rem;
+}
+
+.sobre-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.8rem 2.4rem;
+  margin-top: 2rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(10,9,7,0.15);
+}
+
+.sobre-fact-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.55;
+  margin-bottom: 0.4rem;
+}
+
+.sobre-fact-value {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 36, "WONK" 1;
+  color: var(--ink);
+}
+
+/* ========================================================
+   8. LANÇAMENTOS (Releases)
+   ======================================================== */
+.lancamentos {
+  padding: 8rem var(--pad-x) 6rem;
+  background: var(--ink);
+  position: relative;
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--ink-3);
+}
+
+@media (max-width: 700px) {
+  .section-head { grid-template-columns: 1fr; }
+}
+
+.section-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  color: var(--bone);
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--rust);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.section-aside {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  text-align: right;
+  max-width: 22rem;
+  line-height: 1.6;
+}
+
+.releases-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 880px) {
+  .releases-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.release {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  cursor: pointer;
+}
+
+/* asymmetric placement */
+.release.r-feat { grid-column: span 7; }
+.release.r-1    { grid-column: span 5; }
+.release.r-2    { grid-column: span 4; }
+.release.r-3    { grid-column: span 4; }
+.release.r-4    { grid-column: span 4; }
+.release.r-5    { grid-column: span 6; }
+.release.r-6    { grid-column: span 6; }
+
+@media (max-width: 880px) {
+  .release.r-feat,
+  .release.r-1,
+  .release.r-2,
+  .release.r-3,
+  .release.r-4,
+  .release.r-5,
+  .release.r-6 { grid-column: span 1; }
+}
+
+.release-art {
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--ink-3);
+  display: grid;
+  place-items: center;
+}
+
+.release.r-feat .release-art {
+  aspect-ratio: 16 / 11;
+}
+
+.release-art-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--rust-deep), var(--ink));
+  transition: transform 0.8s var(--ease-out);
+}
+
+.release-art-fill.r-cobaia { background: linear-gradient(135deg, #2A1B0F, #C44A1F 60%, #E8A33A); }
+.release-art-fill.r-solto  { background: linear-gradient(160deg, #1B2018, #4F5638, #B5AB91); }
+.release-art-fill.r-pinga  { background: linear-gradient(45deg, #14110D, #8C2F0F, #E0735A); }
+.release-art-fill.r-nada   { background: radial-gradient(circle at 30% 30%, #E8A33A, #C44A1F 40%, #14110D 90%); }
+.release-art-fill.r-origem { background: linear-gradient(180deg, #B5AB91, #4F5638 80%); }
+.release-art-fill.r-debut  { background: linear-gradient(135deg, #14110D 30%, #1E1A14, #C44A1F); }
+.release-art-fill.r-live   { background: linear-gradient(180deg, #1E1A14, #8C2F0F 70%, #14110D); }
+
+.release-art-num {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  color: var(--bone);
+  z-index: 2;
+  mix-blend-mode: difference;
+}
+
+.release-art-title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.4vw, 3rem);
+  line-height: 0.95;
+  color: var(--bone);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  text-align: center;
+  padding: 0 1rem;
+  letter-spacing: -0.02em;
+  mix-blend-mode: overlay;
+  filter: brightness(1.6);
+}
+
+.release-art-play {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3.4rem; height: 3.4rem;
+  border-radius: 50%;
+  background: var(--bone);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  z-index: 3;
+  transition: transform 0.4s var(--ease-out), background 0.3s var(--ease-out);
+}
+
+.release:hover .release-art-fill { transform: scale(1.06); }
+.release:hover .release-art-play {
+  transform: scale(1.12);
+  background: var(--rust);
+  color: var(--bone);
+}
+
+.release-meta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.4rem;
+  align-items: end;
+}
+
+.release-name {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  line-height: 1.05;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  color: var(--bone);
+}
+
+.release-name .it { font-style: italic; color: var(--rust-soft); }
+
+.release-info {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  text-align: right;
+}
+
+.release-tag {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rust);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.release-tag::before {
+  content: ""; width: 6px; height: 6px;
+  background: var(--rust); border-radius: 50%;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+/* ========================================================
+   9. VÍDEOS
+   ======================================================== */
+.videos {
+  background: var(--ink-2);
+  padding: 8rem 0 8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.videos .section-head { padding-left: var(--pad-x); padding-right: var(--pad-x); }
+.videos > .section-mark { left: var(--pad-x); }
+
+.videos-strip {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 var(--pad-x) 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--rust) var(--ink-3);
+  scrollbar-width: thin;
+}
+
+.videos-strip::-webkit-scrollbar { height: 6px; }
+.videos-strip::-webkit-scrollbar-track { background: var(--ink-3); }
+.videos-strip::-webkit-scrollbar-thumb { background: var(--rust); }
+
+.video-card {
+  flex: 0 0 clamp(20rem, 40vw, 36rem);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.video-frame {
+  aspect-ratio: 16 / 9;
+  background: var(--ink-3);
+  position: relative;
+  overflow: hidden;
+}
+
+.video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-frame-cover {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  background-color: var(--ink-3);
+  background-size: cover;
+  background-position: center;
+}
+
+.video-frame-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(10,9,7,0.7));
+}
+
+.video-cover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85) brightness(0.85);
+  z-index: 0;
+}
+
+.video-frame-cover .play {
+  width: 4.5rem; height: 4.5rem;
+  border-radius: 50%;
+  background: var(--rust);
+  color: var(--bone);
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  transition: transform 0.4s var(--ease-out), background 0.3s var(--ease-out);
+}
+
+.video-frame-cover:hover .play {
+  transform: scale(1.15);
+  background: var(--bone);
+  color: var(--ink);
+}
+
+.video-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 3;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone);
+  background: rgba(10,9,7,0.7);
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--bone-3);
+}
+
+.video-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.video-title {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  line-height: 1.1;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+}
+
+.video-info {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  white-space: nowrap;
+}
+
+/* ========================================================
+   10. AGENDA / TURNÊ
+   ======================================================== */
+.agenda {
+  padding: 8rem var(--pad-x);
+  background: var(--ink);
+}
+
+.agenda-list {
+  border-top: 1px solid var(--ink-3);
+}
+
+.agenda-row {
+  display: grid;
+  grid-template-columns: 7rem 1fr 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--ink-3);
+  position: relative;
+  transition: padding 0.4s var(--ease-out), background 0.4s var(--ease-out);
+  cursor: pointer;
+}
+
+.agenda-row::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(-1 * var(--pad-x));
+  background: var(--ink-2);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  z-index: -1;
+}
+
+.agenda-row:hover::before { opacity: 1; }
+.agenda-row:hover { padding-left: 1rem; padding-right: 1rem; }
+
+.agenda-date {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.agenda-day {
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  color: var(--bone);
+  letter-spacing: -0.03em;
+}
+
+.agenda-monthyear {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.agenda-city {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  font-variation-settings: "opsz" 72, "SOFT" 30, "WONK" 1;
+  color: var(--bone);
+  letter-spacing: -0.02em;
+}
+.agenda-city .uf {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--bone-3);
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+.agenda-venue {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bone-2);
+  line-height: 1.4;
+}
+.agenda-venue .sub {
+  display: block;
+  font-size: 0.66rem;
+  color: var(--bone-3);
+  margin-top: 0.15rem;
+  letter-spacing: 0.16em;
+}
+
+.agenda-status {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.agenda-status.live    { color: var(--rust);   border-color: var(--rust); }
+.agenda-status.sold    { color: var(--bone-3); border-color: var(--bone-3); text-decoration: line-through; opacity: 0.7; }
+.agenda-status.soon    { color: var(--ember);  border-color: var(--ember); }
+
+@media (max-width: 760px) {
+  .agenda-row {
+    grid-template-columns: 5rem 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.6rem 1rem;
+  }
+  .agenda-date { grid-row: span 2; }
+  .agenda-venue,
+  .agenda-status { grid-column: 2; }
+  .agenda-status { justify-self: start; margin-top: 0.4rem; }
+}
+
+.agenda-foot {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.agenda-cta-link {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--rust);
+  padding-bottom: 0.4rem;
+  transition: gap 0.4s var(--ease-out);
+}
+.agenda-cta-link:hover { gap: 1rem; }
+
+.agenda-foot-note {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+}
+
+/* ========================================================
+   11. LOJA / MERCH
+   ======================================================== */
+.loja {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 8rem var(--pad-x);
+  position: relative;
+}
+
+.loja-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 880px) {
+  .loja-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+.loja-copy .eyebrow { color: var(--rust); }
+.loja-copy .eyebrow::before { background: var(--rust); }
+
+.loja-headline {
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  margin: 1.5rem 0 1.5rem;
+  color: var(--ink);
+}
+.loja-headline em {
+  font-style: italic;
+  color: var(--rust);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.loja-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 26rem;
+  margin-bottom: 2rem;
+}
+
+.loja-list {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.loja-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-bottom: 1px solid rgba(10,9,7,0.15);
+  padding: 0.4rem 0;
+}
+
+.loja-list li::before {
+  content: "✕";
+  color: var(--rust);
+  font-size: 0.85em;
+}
+
+.loja-cta {
+  background: var(--ink);
+  color: var(--bone);
+  border-color: var(--ink);
+}
+.loja-cta:hover { background: var(--rust); border-color: var(--rust); }
+
+.loja-product {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(180deg, var(--paper-2), var(--bone-2));
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.loja-product-shape {
+  width: 70%;
+  height: 80%;
+  background: var(--ink);
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2rem;
+  transform: rotate(-2deg);
+}
+
+.loja-product-shape::before {
+  content: "";
+  position: absolute;
+  inset: 0.6rem;
+  border: 1px solid var(--bone);
+  pointer-events: none;
+}
+
+.loja-product-name {
+  font-family: var(--display);
+  color: var(--bone);
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.loja-product-name span { color: var(--rust); display: block; font-style: normal; }
+
+.loja-product-meta {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone);
+  z-index: 2;
+}
+
+.loja-product-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 3;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--rust);
+  color: var(--bone);
+  padding: 0.4rem 0.7rem;
+  transform: rotate(-3deg);
+}
+
+/* ========================================================
+   12. CONTATO / BOOKING
+   ======================================================== */
+.contato {
+  padding: 8rem var(--pad-x);
+  background: var(--ink);
+}
+
+.contato-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 880px) {
+  .contato-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+.contato-headline {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  margin-bottom: 2rem;
+}
+.contato-headline em {
+  font-style: italic;
+  color: var(--rust);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.contato-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--bone-2);
+  max-width: 28rem;
+  margin-bottom: 2.5rem;
+}
+
+.contato-channels {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid var(--ink-3);
+  padding-top: 2rem;
+}
+
+.contato-channel {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--ink-3);
+}
+
+.contato-channel-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  align-self: start;
+  padding-top: 0.4rem;
+  min-width: 7rem;
+}
+
+.contato-channel-value {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+  color: var(--bone);
+  word-break: break-word;
+}
+
+.contato-channel-value a {
+  border-bottom: 1px dashed var(--bone-3);
+  transition: border 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+.contato-channel-value a:hover { color: var(--rust); border-bottom-color: var(--rust); }
+
+/* form */
+.contato-form {
+  background: var(--ink-2);
+  padding: 2.5rem;
+  border: 1px solid var(--ink-3);
+  display: grid;
+  gap: 1.4rem;
+}
+
+.contato-form-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+  border-bottom: 1px solid var(--ink-3);
+  padding-bottom: 1rem;
+  margin-bottom: 0.4rem;
+}
+.contato-form-head .red { color: var(--rust); }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  position: relative;
+}
+
+.field label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.6rem 0;
+  font-family: var(--display);
+  font-size: 1.1rem;
+  background: transparent;
+  color: var(--bone);
+  border: none;
+  border-bottom: 1px solid var(--ink-3);
+  outline: none;
+  transition: border-color 0.3s var(--ease-out);
+  font-variation-settings: "opsz" 36, "SOFT" 30, "WONK" 1;
+}
+
+.field textarea { resize: vertical; min-height: 6rem; }
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus { border-color: var(--rust); }
+
+.field input::placeholder,
+.field textarea::placeholder { color: var(--bone-3); opacity: 0.4; }
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+@media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+
+.contato-submit {
+  background: var(--rust);
+  color: var(--bone);
+  padding: 1.1rem 1.4rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  transition: background 0.3s var(--ease-out);
+}
+.contato-submit:hover { background: var(--rust-deep); }
+
+/* ========================================================
+   13. FOOTER
+   ======================================================== */
+.footer {
+  background: var(--ink);
+  color: var(--bone);
+  padding: 6rem var(--pad-x) 2rem;
+  border-top: 1px solid var(--ink-3);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-mark {
+  font-family: var(--display);
+  font-size: clamp(5rem, 22vw, 22rem);
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+  color: var(--bone);
+  text-align: center;
+  pointer-events: none;
+}
+.footer-mark .it {
+  font-style: italic;
+  display: block;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+.footer-mark .red { color: var(--rust); }
+
+.footer-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ink-3);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-3);
+}
+
+.footer-bar .center { display: flex; gap: 1.4rem; }
+.footer-bar .right { text-align: right; }
+.footer-bar a { transition: color 0.3s var(--ease-out); }
+.footer-bar a:hover { color: var(--rust); }
+
+@media (max-width: 760px) {
+  .footer-bar { grid-template-columns: 1fr; gap: 0.6rem; text-align: left; }
+  .footer-bar .center { justify-content: flex-start; flex-wrap: wrap; }
+  .footer-bar .right { text-align: left; }
+}
+
+/* tiny scroll-progress dot */
+.scroll-anchor {
+  position: fixed;
+  right: 1.4rem; bottom: 1.4rem;
+  z-index: 90;
+  width: 3rem; height: 3rem;
+  border-radius: 50%;
+  background: var(--rust);
+  display: grid;
+  place-items: center;
+  color: var(--bone);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), background 0.3s var(--ease-out);
+  border: 1px solid transparent;
+}
+.scroll-anchor.visible { opacity: 1; transform: translateY(0); }
+.scroll-anchor:hover { background: var(--bone); color: var(--ink); }
+
+/* reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* a11y */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ========================== NAV ========================== -->
+<nav class="nav" aria-label="Navegação principal">
+  <a href="#hero" class="nav-mark">
+    <span class="glyph" aria-hidden="true"></span>
+    Lauana <em style="font-style:italic; color: var(--rust);">·</em> Prado
+  </a>
+
+  <div class="nav-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#lancamentos">Lançamentos</a>
+    <a href="#videos">Vídeos</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#loja">Loja</a>
+  </div>
+
+  <div class="nav-streams">
+    <a href="#contato" class="nav-cta">
+      Booking
+      <span class="arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ========================== HERO ========================== -->
+<section class="hero" id="hero">
+  <div class="hero-grid">
+
+    <div class="hero-headline">
+      <div class="hero-meta">
+        <span>EST. <span class="tnum">2018</span> · GOIÂNIA / GO</span>
+        <div class="hero-meta-right">
+          <span class="tnum">47°23'S</span>
+          <span>NEW · <span class="tnum">2026</span></span>
+        </div>
+      </div>
+
+      <h1 class="hero-name">
+        <span class="lauana">Lauana</span>
+        <span class="prado">Prado</span>
+      </h1>
+
+      <p class="hero-tagline">
+        Cantora, compositora e dona da voz que <em>reescreveu o sertanejo feminino</em> brasileiro nos últimos sete anos. Turnê <em>Espelho</em> em circulação em <span class="mono tnum">14</span> cidades.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#agenda">
+          Ver agenda
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn-ghost" href="#lancamentos">
+          Ouvir lançamentos
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <aside class="hero-aside">
+      <figure class="hero-portrait">
+        <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=900&q=85&fm=webp" alt="Microfone em palco" loading="eager" />
+        <figcaption class="hero-portrait-tag">
+          <span>TURNÊ <span class="red">·</span> ESPELHO</span>
+          <span class="tnum">2026</span>
+        </figcaption>
+      </figure>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num tnum">8.4M</span>
+          <span class="hero-stat-label">Ouvintes / mês</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num tnum">14</span>
+          <span class="hero-stat-label">Cidades · turnê</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num tnum">07</span>
+          <span class="hero-stat-label">Anos · estrada</span>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- bottom marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Novo single <span class="red">Cobaia</span> <span class="glyph"></span> ouça agora</span>
+      <span>Turnê <em style="font-style:italic">Espelho</em> 2026 <span class="glyph"></span> 14 cidades</span>
+      <span>Novo single <span class="red">Cobaia</span> <span class="glyph"></span> ouça agora</span>
+      <span>Turnê <em style="font-style:italic">Espelho</em> 2026 <span class="glyph"></span> 14 cidades</span>
+      <span>Novo single <span class="red">Cobaia</span> <span class="glyph"></span> ouça agora</span>
+      <span>Turnê <em style="font-style:italic">Espelho</em> 2026 <span class="glyph"></span> 14 cidades</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== SOBRE ========================== -->
+<section class="sobre" id="sobre">
+  <div class="section-mark"><span>§01 · Biografia</span></div>
+
+  <div class="sobre-grid">
+    <aside class="sobre-aside">
+      <figure class="sobre-photo reveal">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&q=85&fm=webp" alt="Show ao vivo" loading="lazy" />
+      </figure>
+      <figcaption class="sobre-photo-cap">
+        <span>FOTO · ARQUIVO</span>
+        <span class="tnum">FIG. 01</span>
+      </figcaption>
+    </aside>
+
+    <div class="sobre-body reveal">
+      <span class="sobre-eyebrow">A artista</span>
+
+      <h2 class="sobre-headline">
+        Voz, viola e <em>verdade</em> — em proporções iguais.
+      </h2>
+
+      <div class="sobre-text">
+        <p>
+          Nascida em Goiânia, Lauana Prado começou a cantar antes de aprender a ler partitura. Filha do interior, do rádio AM e do palco improvisado de boteco, transformou ouvido afiado e voz grave em um lugar próprio dentro do sertanejo brasileiro — gênero que, até pouco tempo atrás, raramente era contado por mulheres como ela.
+        </p>
+        <p>
+          Em 2018 lançou seu primeiro EP independente. Em 2020, com <em style="font-style:italic">Cobaia</em>, virou a chave: o single explodiu nas plataformas, atravessou fronteiras e mostrou que o sertanejo feminino podia ser ao mesmo tempo radiofônico, autoral e desconfortavelmente honesto. De lá pra cá, foram dois discos cheios, três projetos ao vivo e centenas de shows em estradas que cruzam o país.
+        </p>
+        <p>
+          O som dela mistura raiz com produção contemporânea, batida sertaneja com guitarra crua, e letras que conversam com mulheres que aprenderam a se levantar sozinhas. É música pra ouvir alto, no caminhão e no fone, na estrada e no quarto.
+        </p>
+      </div>
+
+      <blockquote class="sobre-quote">
+        Eu não vim pra ser delicada. Vim pra ser verdadeira — e isso assusta mais.
+        <span class="sobre-quote-by">— Lauana Prado, Folha de S.Paulo (2024)</span>
+      </blockquote>
+
+      <div class="sobre-facts">
+        <div>
+          <div class="sobre-fact-label">Origem</div>
+          <div class="sobre-fact-value">Goiânia, GO</div>
+        </div>
+        <div>
+          <div class="sobre-fact-label">Estreia</div>
+          <div class="sobre-fact-value tnum">2018</div>
+        </div>
+        <div>
+          <div class="sobre-fact-label">Discos</div>
+          <div class="sobre-fact-value tnum">02 · cheios</div>
+        </div>
+        <div>
+          <div class="sobre-fact-label">Atualmente</div>
+          <div class="sobre-fact-value">Turnê Espelho</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== LANÇAMENTOS ========================== -->
+<section class="lancamentos" id="lancamentos">
+  <div class="section-mark"><span>§02 · Discografia</span></div>
+
+  <header class="section-head">
+    <h2 class="section-title">
+      Lançamentos
+      <em>recentes</em>.
+    </h2>
+    <p class="section-aside">
+      Singles, álbuns e projetos ao vivo.<br/>
+      Disponível nas principais plataformas — <span style="color:var(--rust)">tudo de uma vez ↗</span>
+    </p>
+  </header>
+
+  <div class="releases-grid">
+
+    <article class="release r-feat reveal">
+      <div class="release-art">
+        <div class="release-art-fill r-cobaia"></div>
+        <span class="release-art-num tnum">01 / SINGLE</span>
+        <h3 class="release-art-title">Cobaia <em>(2026)</em></h3>
+        <button class="release-art-play" aria-label="Tocar Cobaia">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+        </button>
+      </div>
+      <div class="release-meta">
+        <h4 class="release-name">Cobaia <span class="it">(versão estendida)</span></h4>
+        <span class="release-info"><span class="tnum">04:11</span> · 2026</span>
+      </div>
+      <span class="release-tag">Lançamento da semana</span>
+    </article>
+
+    <article class="release r-1 reveal">
+      <div class="release-art">
+        <div class="release-art-fill r-solto"></div>
+        <span class="release-art-num tnum">02 / SINGLE</span>
+        <h3 class="release-art-title">Tô Solto</h3>
+        <button class="release-art-play" aria-label="Tocar">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+        </button>
+      </div>
+      <div class="release-meta">
+        <h4 class="release-name">Tô Solto</h4>
+        <span class="release-info"><span class="tnum">03:42</span> · 2025</span>
+      </div>
+    </article>
+
+    <article class="release r-2 reveal">
+      <div class="release-art">
+        <div class="release-art-fill r-pinga"></div>
+        <span class="release-art-num tnum">03 / SINGLE</span>
+        <h3 class="release-art-title">Pinga em Mim</h3>
+        <button class="release-art-play" aria-label="Tocar">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+        </button>
+      </div>
+      <div class="release-meta">
+        <h4 class="release-name">Pinga em Mim</h4>
+        <span class="release-info"><span class="tnum">03:28</span> · 2025</span>
+      </div>
+    </article>
+
+    <article class="release r-3 reveal">
+      <div class="release-art">
+        <div class="release-art-fill r-nada"></div>
+        <span class="release-art-num tnum">04 / SINGLE</span>
+        <h3 class="release-art-title">Nada Demais</h3>
+        <button class="release-art-play" aria-label="Tocar">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+        </button>
+      </div>
+      <div class="release-meta">
+        <h4 class="release-name">Nada Demais</h4>
+        <span class="release-info"><span class="tnum">02:58</span> · 2024</span>
+      </div>
+    </article>
+
+    <article class="release r-4 reveal">
+      <div class="release-art">
+        <div class="release-art-fill r-debut"></div>
+        <span class="release-art-num tnum">05 / EP</span>
+        <h3 class="release-art-title">Acústico em Casa</h3>
+        <button class="release-art-play" aria-label="Tocar">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+        </button>
+      </div>
+      <div class="release-meta">
+        <h4 class="release-name">Acústico em Casa <span class="it">— Vol. 1</span></h4>
+        <span class="release-info"><span class="tnum">7 faixas</span> · 2024</span>
+      </div>
+    </article>
+
+    <article class="release r-5 reveal">
+      <div class="release-art">
+        <div class="release-art-fill r-origem"></div>
+        <span class="release-art-num tnum">06 / ÁLBUM</span>
+        <h3 class="release-art-title">Origens</h3>
+        <button class="release-art-play" aria-label="Tocar">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+        </button>
+      </div>
+      <div class="release-meta">
+        <h4 class="release-name">Origens <span class="it">(álbum)</span></h4>
+        <span class="release-info"><span class="tnum">14 faixas</span> · 2023</span>
+      </div>
+    </article>
+
+    <article class="release r-6 reveal">
+      <div class="release-art">
+        <div class="release-art-fill r-live"></div>
+        <span class="release-art-num tnum">07 / AO VIVO</span>
+        <h3 class="release-art-title">Espelho · Ao Vivo</h3>
+        <button class="release-art-play" aria-label="Tocar">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+        </button>
+      </div>
+      <div class="release-meta">
+        <h4 class="release-name">Espelho <span class="it">— ao vivo em Goiânia</span></h4>
+        <span class="release-info"><span class="tnum">12 faixas</span> · 2023</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ========================== VÍDEOS ========================== -->
+<section class="videos" id="videos">
+  <div class="section-mark"><span>§03 · Visualidade</span></div>
+
+  <header class="section-head">
+    <h2 class="section-title">
+      No <em>vídeo</em>.
+    </h2>
+    <p class="section-aside">
+      Clipes oficiais, performances ao vivo e bastidores. Fonte: canal oficial no YouTube.
+    </p>
+  </header>
+
+  <div class="videos-strip" role="list">
+
+    <article class="video-card" role="listitem">
+      <div class="video-frame">
+        <span class="video-tag">Clipe oficial</span>
+        <button class="video-frame-cover" aria-label="Tocar Cobaia" data-yt="dQw4w9WgXcQ">
+          <img class="video-cover-img" src="https://images.unsplash.com/photo-1499415479124-43c32433a620?w=1200&q=85&fm=webp" alt="" />
+          <span class="play">
+            <svg width="22" height="26" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+          </span>
+        </button>
+      </div>
+      <div class="video-meta">
+        <h3 class="video-title">Cobaia <em style="font-style:italic">(clipe oficial)</em></h3>
+        <span class="video-info"><span class="tnum">04:11</span> · <span class="tnum">12M</span> views</span>
+      </div>
+    </article>
+
+    <article class="video-card" role="listitem">
+      <div class="video-frame">
+        <span class="video-tag">Ao vivo</span>
+        <button class="video-frame-cover" aria-label="Tocar performance" data-yt="dQw4w9WgXcQ">
+          <img class="video-cover-img" src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1200&q=85&fm=webp" alt="" />
+          <span class="play">
+            <svg width="22" height="26" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+          </span>
+        </button>
+      </div>
+      <div class="video-meta">
+        <h3 class="video-title">Tô Solto · Espelho ao vivo</h3>
+        <span class="video-info"><span class="tnum">03:42</span> · <span class="tnum">3.4M</span></span>
+      </div>
+    </article>
+
+    <article class="video-card" role="listitem">
+      <div class="video-frame">
+        <span class="video-tag">Acústico</span>
+        <button class="video-frame-cover" aria-label="Tocar acústico" data-yt="dQw4w9WgXcQ">
+          <img class="video-cover-img" src="https://images.unsplash.com/photo-1483721310020-03333e577078?w=1200&q=85&fm=webp" alt="" />
+          <span class="play">
+            <svg width="22" height="26" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+          </span>
+        </button>
+      </div>
+      <div class="video-meta">
+        <h3 class="video-title">Pinga em Mim · acústico</h3>
+        <span class="video-info"><span class="tnum">03:28</span> · <span class="tnum">1.8M</span></span>
+      </div>
+    </article>
+
+    <article class="video-card" role="listitem">
+      <div class="video-frame">
+        <span class="video-tag">Bastidor</span>
+        <button class="video-frame-cover" aria-label="Tocar bastidor" data-yt="dQw4w9WgXcQ">
+          <img class="video-cover-img" src="https://images.unsplash.com/photo-1574391884720-bbc049ec09ad?w=1200&q=85&fm=webp" alt="" />
+          <span class="play">
+            <svg width="22" height="26" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+          </span>
+        </button>
+      </div>
+      <div class="video-meta">
+        <h3 class="video-title">Estrada · making of</h3>
+        <span class="video-info"><span class="tnum">06:14</span> · <span class="tnum">820K</span></span>
+      </div>
+    </article>
+
+    <article class="video-card" role="listitem">
+      <div class="video-frame">
+        <span class="video-tag">Documental</span>
+        <button class="video-frame-cover" aria-label="Tocar documental" data-yt="dQw4w9WgXcQ">
+          <img class="video-cover-img" src="https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=1200&q=85&fm=webp" alt="" />
+          <span class="play">
+            <svg width="22" height="26" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16Z"/></svg>
+          </span>
+        </button>
+      </div>
+      <div class="video-meta">
+        <h3 class="video-title">Origens · documental</h3>
+        <span class="video-info"><span class="tnum">22:40</span> · <span class="tnum">410K</span></span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ========================== AGENDA ========================== -->
+<section class="agenda" id="agenda">
+  <div class="section-mark"><span>§04 · Em circulação</span></div>
+
+  <header class="section-head">
+    <h2 class="section-title">
+      Turnê <em>Espelho</em>.
+    </h2>
+    <p class="section-aside">
+      Datas confirmadas para 2026. Os ingressos abrem por etapas — entre na lista de espera.
+    </p>
+  </header>
+
+  <div class="agenda-list" role="list">
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">14</span>
+        <span class="agenda-monthyear"><span>MAI</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">Goiânia <span class="uf">/ GO</span></div>
+      <div class="agenda-venue">Arena Goiânia<span class="sub">Sextou ao Vivo · Abertura da turnê</span></div>
+      <span class="agenda-status sold">Esgotado</span>
+    </a>
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">22</span>
+        <span class="agenda-monthyear"><span>MAI</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">São Paulo <span class="uf">/ SP</span></div>
+      <div class="agenda-venue">Espaço Unimed<span class="sub">Pista · Mezanino · Camarote</span></div>
+      <span class="agenda-status live">Ingressos</span>
+    </a>
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">06</span>
+        <span class="agenda-monthyear"><span>JUN</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">Rio de Janeiro <span class="uf">/ RJ</span></div>
+      <div class="agenda-venue">Vivo Rio<span class="sub">Pista premium · Mesa</span></div>
+      <span class="agenda-status live">Ingressos</span>
+    </a>
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">19</span>
+        <span class="agenda-monthyear"><span>JUN</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">Belo Horizonte <span class="uf">/ MG</span></div>
+      <div class="agenda-venue">Arena Hall<span class="sub">Pista · Camarote VIP</span></div>
+      <span class="agenda-status live">Ingressos</span>
+    </a>
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">04</span>
+        <span class="agenda-monthyear"><span>JUL</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">Brasília <span class="uf">/ DF</span></div>
+      <div class="agenda-venue">Centro de Convenções Ulysses Guimarães<span class="sub">Pista · Lounge</span></div>
+      <span class="agenda-status sold">Esgotado</span>
+    </a>
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">17</span>
+        <span class="agenda-monthyear"><span>JUL</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">Curitiba <span class="uf">/ PR</span></div>
+      <div class="agenda-venue">Pedreira Paulo Leminski<span class="sub">Festival Sertanejas · Open air</span></div>
+      <span class="agenda-status live">Ingressos</span>
+    </a>
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">31</span>
+        <span class="agenda-monthyear"><span>JUL</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">Porto Alegre <span class="uf">/ RS</span></div>
+      <div class="agenda-venue">Auditório Araújo Vianna<span class="sub">Pista · Mezanino</span></div>
+      <span class="agenda-status live">Ingressos</span>
+    </a>
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">14</span>
+        <span class="agenda-monthyear"><span>AGO</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">Salvador <span class="uf">/ BA</span></div>
+      <div class="agenda-venue">Concha Acústica do TCA<span class="sub">Apresentação especial</span></div>
+      <span class="agenda-status soon">Em breve</span>
+    </a>
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">28</span>
+        <span class="agenda-monthyear"><span>AGO</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">Recife <span class="uf">/ PE</span></div>
+      <div class="agenda-venue">Classic Hall<span class="sub">Pista · Camarote</span></div>
+      <span class="agenda-status soon">Em breve</span>
+    </a>
+
+    <a class="agenda-row" role="listitem" href="#">
+      <div class="agenda-date">
+        <span class="agenda-day tnum">11</span>
+        <span class="agenda-monthyear"><span>SET</span><span class="tnum">2026</span></span>
+      </div>
+      <div class="agenda-city">Fortaleza <span class="uf">/ CE</span></div>
+      <div class="agenda-venue">Marina Park<span class="sub">Open air · pista</span></div>
+      <span class="agenda-status soon">Em breve</span>
+    </a>
+
+  </div>
+
+  <div class="agenda-foot">
+    <a href="#contato" class="agenda-cta-link">
+      Levar a turnê para sua cidade
+      <span aria-hidden="true">→</span>
+    </a>
+    <span class="agenda-foot-note">Atualizado em <span class="tnum">06.05.2026</span></span>
+  </div>
+</section>
+
+<!-- ========================== LOJA ========================== -->
+<section class="loja" id="loja">
+  <div class="loja-inner">
+
+    <div class="loja-copy reveal">
+      <span class="eyebrow">§05 · Merch oficial</span>
+
+      <h2 class="loja-headline">
+        Vista a <em>turnê</em>.
+      </h2>
+
+      <p class="loja-text">
+        Coleção limitada da turnê <em style="font-style:italic">Espelho</em>. Camisetas, regatas, bonés, posters numerados e o vinil de <em style="font-style:italic">Origens</em>. Tudo desenhado em parceria com artistas e produzido em pequenas tiragens.
+      </p>
+
+      <ul class="loja-list">
+        <li>Camiseta oversized · algodão pesado</li>
+        <li>Boné estruturado · bordado a mão</li>
+        <li>Poster numerado · ed. limitada de 200</li>
+        <li>Vinil <em style="font-style:italic">Origens</em> · 180g · prensagem GO</li>
+      </ul>
+
+      <a class="btn btn-ghost loja-cta" href="#">
+        Entrar na loja
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="loja-product reveal">
+      <span class="loja-product-tag">ed. limitada</span>
+      <div class="loja-product-shape">
+        <h3 class="loja-product-name">
+          Espelho
+          <span>Tour 2026</span>
+        </h3>
+      </div>
+      <div class="loja-product-meta">
+        <span>Camiseta · 100% algodão</span>
+        <span class="tnum">R$ 149,00</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================== CONTATO ========================== -->
+<section class="contato" id="contato">
+  <div class="section-mark"><span>§06 · Contato</span></div>
+
+  <div class="contato-grid">
+
+    <div class="reveal">
+      <span class="eyebrow" style="margin-bottom: 1.4rem;">Booking · Imprensa · Parcerias</span>
+
+      <h2 class="contato-headline">
+        Vamos <em>conversar</em>.
+      </h2>
+
+      <p class="contato-text">
+        Para shows, apresentações privadas, parcerias comerciais ou solicitações de imprensa — escolha o canal certo. Respondemos em até <span class="tnum">48h</span> em dias úteis.
+      </p>
+
+      <div class="contato-channels">
+
+        <div class="contato-channel">
+          <span class="contato-channel-label">Booking</span>
+          <span class="contato-channel-value">
+            <a href="mailto:booking@lauanaprado.com.br">booking@lauanaprado.com.br</a>
+          </span>
+        </div>
+
+        <div class="contato-channel">
+          <span class="contato-channel-label">Imprensa</span>
+          <span class="contato-channel-value">
+            <a href="mailto:imprensa@lauanaprado.com.br">imprensa@lauanaprado.com.br</a>
+          </span>
+        </div>
+
+        <div class="contato-channel">
+          <span class="contato-channel-label">Parcerias</span>
+          <span class="contato-channel-value">
+            <a href="mailto:comercial@lauanaprado.com.br">comercial@lauanaprado.com.br</a>
+          </span>
+        </div>
+
+        <div class="contato-channel">
+          <span class="contato-channel-label">Empresário</span>
+          <span class="contato-channel-value">Diego Almeida<br/><span style="font-size:0.85rem; color:var(--bone-3); font-family:var(--mono); letter-spacing:0.1em;">+55 (62) 9 9999-9999</span></span>
+        </div>
+
+      </div>
+    </div>
+
+    <form class="contato-form reveal" onsubmit="return false;">
+      <div class="contato-form-head">
+        <span>Pedido de show / proposta</span>
+        <span class="red">FORM · 01</span>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-nome">Nome</label>
+          <input id="f-nome" type="text" placeholder="Como podemos te chamar?" />
+        </div>
+        <div class="field">
+          <label for="f-empresa">Empresa / produtora</label>
+          <input id="f-empresa" type="text" placeholder="Opcional" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-email">E-mail</label>
+          <input id="f-email" type="email" placeholder="voce@empresa.com.br" />
+        </div>
+        <div class="field">
+          <label for="f-tipo">Tipo de pedido</label>
+          <select id="f-tipo">
+            <option>Show / apresentação</option>
+            <option>Imprensa / entrevista</option>
+            <option>Parceria comercial</option>
+            <option>Outro</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-data">Data prevista</label>
+          <input id="f-data" type="text" placeholder="DD / MM / 2026" />
+        </div>
+        <div class="field">
+          <label for="f-cidade">Cidade</label>
+          <input id="f-cidade" type="text" placeholder="Cidade · UF" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-msg">Mensagem</label>
+        <textarea id="f-msg" placeholder="Conte um pouco do projeto: público, estrutura, parceiros…"></textarea>
+      </div>
+
+      <button class="contato-submit" type="submit">
+        Enviar proposta
+        <span aria-hidden="true">→</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ========================== FOOTER ========================== -->
+<footer class="footer" id="footer">
+  <div class="footer-mark" aria-hidden="true">
+    <span class="it">Lauana</span>
+    <span>Prado<span class="red">.</span></span>
+  </div>
+
+  <div class="footer-bar">
+    <div class="left">© <span class="tnum">2026</span> · Lauana Prado · Todos os direitos reservados</div>
+    <div class="center">
+      <a href="#">Spotify</a>
+      <a href="#">Apple Music</a>
+      <a href="#">YouTube</a>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
+    <div class="right">Site por <em style="font-style:italic; color:var(--rust)">Estúdio Espelho</em> · 2026</div>
+  </div>
+</footer>
+
+<!-- scroll-to-top -->
+<button class="scroll-anchor" aria-label="Voltar ao topo" id="scrollTop">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1L13 7H10V13H4V7H1L7 1Z"/></svg>
+</button>
+
+<script>
+/* IntersectionObserver — reveal on scroll */
+(() => {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(el => io.observe(el));
+})();
+
+/* Scroll-to-top */
+(() => {
+  const btn = document.getElementById('scrollTop');
+  const onScroll = () => {
+    if (window.scrollY > window.innerHeight) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+
+/* YouTube lazy-load */
+(() => {
+  document.querySelectorAll('.video-frame-cover').forEach(cover => {
+    cover.addEventListener('click', () => {
+      const id = cover.dataset.yt;
+      if (!id) return;
+      const frame = cover.parentElement;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.title = cover.getAttribute('aria-label') || 'Vídeo';
+      frame.appendChild(iframe);
+      cover.remove();
+    });
+  });
+})();
+
+/* Marquee duplicate-safe — already duplicated in markup */
+</script>
+
+</body>
+</html>
